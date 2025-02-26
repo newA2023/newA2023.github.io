@@ -1,10 +1,88 @@
 <!DOCTYPE html>
-<html>
-<head>
-<title>Hello World</title>
-</head>
-<body>
-<h1>Hello, World!</h1>
-<p>This is a simple HTML page.</p>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The grind</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .countdown {
+        text-align: center;
+      }
+
+      .timer {
+        font-size: 2rem;
+        margin-top: 10px;
+      }
+
+      .video {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="countdown">
+      <h1>To get a tangible offer by: 2025-02-28</h1>
+      <div class="timer" id="timer">00:00:00</div>
+    </div>
+
+    <div class="video">
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/xb2fjZa_L74?autoplay=1&loop=1&playlist=xb2fjZa_L74"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <script>
+      const countdownDate = new Date("2025-05-31T23:59:59").getTime();
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = countdownDate - now;
+
+        const months = Math.floor(distance / (1000 * 60 * 60 * 24 * 30));
+        const remainingAfterMonths = distance % (1000 * 60 * 60 * 24 * 30);
+
+        const weeks = Math.floor(remainingAfterMonths / (1000 * 60 * 60 * 24 * 7));
+        const remainingAfterWeeks = remainingAfterMonths % (1000 * 60 * 60 * 24 * 7);
+
+        const days = Math.floor(remainingAfterWeeks / (1000 * 60 * 60 * 24));
+        const remainingAfterDays = remainingAfterWeeks % (1000 * 60 * 60 * 24);
+
+        const hours = Math.floor(remainingAfterDays / (1000 * 60 * 60));
+        const remainingAfterHours = remainingAfterDays % (1000 * 60 * 60);
+
+        const minutes = Math.floor(remainingAfterHours / (1000 * 60));
+        const remainingAfterMinutes = remainingAfterHours % (1000 * 60);
+
+        const seconds = Math.floor(remainingAfterMinutes / 1000);
+
+        document.getElementById("timer").innerHTML = `${months
+          .toString()
+          .padStart(2, "0")}months : ${weeks
+          .toString()
+          .padStart(2, "0")}weeks : ${days
+          .toString()
+          .padStart(2, "0")}days : ${hours.toString().padStart(2, "0")}hours : 
+        ${minutes.toString().padStart(2, "0")}minutes : 
+        ${seconds.toString().padStart(2, "0")}seconds`;
+      }
+
+      setInterval(updateCountdown, 1000);
+    </script>
+  </body>
 </html>
